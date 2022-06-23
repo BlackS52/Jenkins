@@ -1,9 +1,8 @@
-#Jenkinsfile (Declarative Pipeline)
 pipeline {
 	agent { 
-		node { label 'gnomeOverlord' }
+		node { label 'first_pancake' }
 	}
-
+/*
 	parameters {
     	booleanParam(defaultValue: true, description: 'Build OMPI', name: 'BUILD')
     	booleanParam(defaultValue: true, description: 'Deploy OMPI', name: 'DEPLOY')
@@ -18,14 +17,15 @@ pipeline {
 
 #	docker { image 'python:3.10.1-alpine' } 
 #	}
-
+*/
    stages {
-		stage('check') { 
-            steps {
-               sh 'python --version'
-					echo 'Check version'
-          }
+	stage('check') { 
+        	steps {
+               		sh 'python --version'
+			echo 'My Check version'
+        	}
 #		stage('Build') { }
 # 		stage('Deploy') { }       
-   }
+   	}
+    }
 }
