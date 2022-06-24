@@ -1,7 +1,9 @@
 pipeline {
-	agent { 
+	agent any
+/*	agent { 
 		node { label 'first_pancake' }
 	}
+*/
 /*
 	parameters {
     	booleanParam(defaultValue: true, description: 'Build OMPI', name: 'BUILD')
@@ -24,8 +26,8 @@ pipeline {
                		sh 'python --version'
 			echo 'My Check version'
         	}
-#		stage('Build') { }
-# 		stage('Deploy') { }       
+//		stage('Build') { }
+// 		stage('Deploy') { }       
    	}
     }
 }
