@@ -32,6 +32,7 @@ pipeline {
 		steps {
 			echo '*** Clone ***************'
 			sh 'git clone https://github.com/BlackS52/ompi_fork.git'
+			sh 'pwd'
 		}
 	} // Clone
     }
