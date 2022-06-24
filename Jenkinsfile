@@ -23,10 +23,15 @@ pipeline {
    stages {
 	stage('check') { 
         	steps {
+			echo '*** Check ***************'
                		sh 'python --version'
-			echo 'My Check version'
         	}
-//		stage('Build') { }
+	stage('Clone base project') { 
+		steps {
+			echo '*** Clone ***************'
+			sh "git clone https://github.com/BlackS52/ompi_fork.git"
+		}
+	}
 // 		stage('Deploy') { }       
    	}
     }
