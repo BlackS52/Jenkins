@@ -26,13 +26,13 @@ pipeline {
 			echo '*** Check ***************'
                		sh 'python --version'
         	}
+
+   	} // check
 	stage('Clone base project') { 
 		steps {
 			echo '*** Clone ***************'
-			sh "git clone https://github.com/BlackS52/ompi_fork.git"
+			sh 'git clone https://github.com/BlackS52/ompi_fork.git'
 		}
-	}
-// 		stage('Deploy') { }       
-   	}
+	} // Clone
     }
 }
