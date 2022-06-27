@@ -33,8 +33,6 @@ pipeline {
 			sh 'git clone ${GIT_OMPIFORK}'
 			sh 'pwd'
 		} 
-			sh './autogen.pl'
-		}	
 	} // Clone OpenMPI
 
 	stage('Clone PMIx ') { 
@@ -66,7 +64,7 @@ pipeline {
 			// Should be close to this /home/mpi_test/pmix/openpmix_build
 //			sh 'cd openpmix/ && ./autogen.pl && ./configure --prefix=$PWD/../openpmix_build && make && make install'
 		}	
-	}
+	} // Build
 
 
    } // stages
