@@ -1,3 +1,4 @@
+// Declarative method 
 pipeline {
 	agent any
 /*	agent { 
@@ -10,16 +11,12 @@ pipeline {
     	booleanParam(defaultValue: true, description: 'Deploy OMPI', name: 'DEPLOY')
     	booleanParam(defaultValue: false, description: 'Remove OMPI', name: 'REMOVE')
 	}
-
+*/
 
 	environment {
-   	SSISBuildPath="/home/mpi_test/jenkins_stuff/ompi/"
-		SSISDeployPath="/home/mpi_test/jenkins_stuff/ompi_install"
+   		GIT_OMPIFORK="https://github.com/BlackS52/ompi_fork.git"
 	}
 
-#	docker { image 'python:3.10.1-alpine' } 
-#	}
-*/
    stages {
 	stage('check') { 
         	steps {
@@ -29,11 +26,21 @@ pipeline {
 
    	} // check
 	stage('Clone base project') { 
-		steps {
+		steps {			
 			echo '*** Clone ***************'
-			sh 'git clone https://github.com/BlackS52/ompi_fork.git'
+			sh 'git clone ${GIT_OMPIFORK}'
+
 			sh 'pwd'
 		}
+	
 	} // Clone
+	post {
+		success {
+			echo "***** Clone successfully done ***"
+		}
+		failure {
+			echo "***** Clone is done with failure ***"
+		}
+	}
     }
 }
