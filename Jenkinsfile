@@ -30,7 +30,8 @@ pipeline {
 	stage('Clone OpenMPI') { 
 		steps {			
 			echo '*** Clone ***************'
-			sh 'git clone ${GIT_OMPIFORK}'
+//			sh 'git clone ${GIT_OMPIFORK}'
+			sh 'git fetch ${GIT_OMPIFORK}'
 			sh 'pwd'
 		} 
 	} // Clone OpenMPI
