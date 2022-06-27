@@ -27,7 +27,7 @@ pipeline {
         	}
 
    	} // check
-	stage('Clone OpenMPI ') { 
+	stage('Clone OpenMPI') { 
 		steps {			
 			echo '*** Clone ***************'
 			sh 'git clone ${GIT_OMPIFORK}'
@@ -35,7 +35,7 @@ pipeline {
 		} 
 	} // Clone OpenMPI
 
-	stage('Clone PMIx ') { 
+	stage('Clone PMIx') { 
 		steps {			
 			echo '*** Clone ***************'
 			sh 'cd ompi_fork/3rd-party/'
@@ -44,7 +44,7 @@ pipeline {
 		}
 	} // Clone PMIx
 
-	stage('Clone PMIx ') { 
+	stage('Clone PRRTE') { 
 		steps {			
 			echo '*** Clone ***************'
 			sh 'cd ompi_fork/3rd-party/'
