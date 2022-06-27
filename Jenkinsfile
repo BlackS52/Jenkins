@@ -37,10 +37,10 @@ pipeline {
    } // stages
    post {
 	success {
-		echo "***** Clone successfully done ***"
+		echo '***** Clone successfully done ***'
 	}
 	failure {
-		echo "***** Clone is done with failure ***"
+		echo '***** Clone is done with failure ***'
 	}
    } // post
-}
+} // pipeline
