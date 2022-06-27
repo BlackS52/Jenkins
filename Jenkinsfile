@@ -30,7 +30,6 @@ pipeline {
 	stage('Clone OpenMPI') { 
 		steps {			
 			echo '*** Clone ***************'
-//			sh 'git clone ${GIT_OMPIFORK}'
 			sh 'git fetch ${GIT_OMPIFORK}'
 			sh 'pwd'
 		} 
@@ -39,18 +38,18 @@ pipeline {
 	stage('Clone PMIx') { 
 		steps {			
 			echo '*** Clone PMIx ***************'
-			sh 'cd ompi_fork/3rd-party/ && git clone ${GIT_PMIX} && pwd'
+			sh 'cd ompi_fork/3rd-party/ && git fetch ${GIT_PMIX} && pwd'
 		}
 	} // Clone PMIx
 
 	stage('Clone PRRTE') { 
 		steps {			
 			echo '*** Clone PRRTE **************'
-			sh 'cd ompi_fork/3rd-party/ && git clone ${GIT_PRRTE} && pwd'
+			sh 'cd ompi_fork/3rd-party/ && git fetch ${GIT_PRRTE} && pwd'
 		}
 	} // Clone PRRTE
 
-/*	stage('Build OpenMPI ') { 
+	stage('Build OpenMPI ') { 
 		steps {			
 			echo '*** Build OpenMPI ***************'
 			sh 'pwd'
@@ -62,7 +61,7 @@ pipeline {
 //			sh 'cd openpmix/ && ./autogen.pl && ./configure --prefix=$PWD/../openpmix_build && make && make install'
 		}	
 	} // Build
-*/
+
 
    } // stages
    post {
