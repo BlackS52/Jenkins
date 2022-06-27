@@ -53,12 +53,8 @@ pipeline {
 		steps {			
 			echo '*** Build OpenMPI ***************'
 			sh 'pwd'
-			sh 'cd ompi_fork/ && ./autogen.pl'
-
-//			sh 'cp -Rp openpmix ompi_fork/3rd-party/'
 			// yum install gcc flex libevent-devel.x86_64 hwloc-devel -y
-			// Should be close to this /home/mpi_test/pmix/openpmix_build
-//			sh 'cd openpmix/ && ./autogen.pl && ./configure --prefix=$PWD/../openpmix_build && make && make install'
+			sh 'cd ompi_fork/ && ./autogen.pl && ./configure --prefix=$PWD/../openmpi_build && make && make install && pwd'
 		}	
 	} // Build
 
