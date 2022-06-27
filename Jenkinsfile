@@ -15,6 +15,8 @@ pipeline {
 
 	environment {
    		GIT_OMPIFORK="https://github.com/BlackS52/ompi_fork.git"
+		GIT_PMIX="https://github.com/openpmix/openpmix.git"
+		GIT_PRRTE="https://github.com/openpmix/prrte.git"
 	}
 
    stages {
@@ -25,15 +27,48 @@ pipeline {
         	}
 
    	} // check
-	stage('Clone base project') { 
+	stage('Clone OpenMPI ') { 
 		steps {			
 			echo '*** Clone ***************'
 			sh 'git clone ${GIT_OMPIFORK}'
+			sh 'pwd'
+		} 
+			sh './autogen.pl'
+		}	
+	} // Clone OpenMPI
 
+	stage('Clone PMIx ') { 
+		steps {			
+			echo '*** Clone ***************'
+			sh 'cd ompi_fork/3rd-party/'
+			sh 'git clone ${GIT_PMIX}'
 			sh 'pwd'
 		}
-	
-	} // Clone
+	} // Clone PMIx
+
+	stage('Clone PMIx ') { 
+		steps {			
+			echo '*** Clone ***************'
+			sh 'cd ompi_fork/3rd-party/'
+			sh 'git clone ${GIT_PRRTE}'
+			sh 'pwd'
+		}
+	} // Clone PRRTE
+
+	stage('Build OpenMPI ') { 
+		steps {			
+			echo '*** Build OpenMPI ***************'
+			sh 'pwd'
+			sh 'cd ompi_fork/ && ./autogen.pl'
+
+//			sh 'cp -Rp openpmix ompi_fork/3rd-party/'
+			// yum install gcc flex libevent-devel.x86_64 hwloc-devel -y
+			// Should be close to this /home/mpi_test/pmix/openpmix_build
+//			sh 'cd openpmix/ && ./autogen.pl && ./configure --prefix=$PWD/../openpmix_build && make && make install'
+		}	
+	}
+
+
    } // stages
    post {
 	success {
