@@ -34,13 +34,13 @@ pipeline {
 		}
 	
 	} // Clone
-	post {
-		success {
-			echo "***** Clone successfully done ***"
-		}
-		failure {
-			echo "***** Clone is done with failure ***"
-		}
+   } // stages
+   post {
+	success {
+		echo "***** Clone successfully done ***"
 	}
-    }
+	failure {
+		echo "***** Clone is done with failure ***"
+	}
+   } // post
 }
