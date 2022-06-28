@@ -1,4 +1,12 @@
 // Declarative method 
+/* 
+*******************************************
+ Target: gather all needs in one place 
+	and build OpenMPI
+*******************************************
+*/
+
+*/
 pipeline {
 	agent any
 /*	agent { 
@@ -27,7 +35,42 @@ pipeline {
         	}
 
    	} // check
-	stage('Clone OpenMPI') { 
+	
+	stage('Build') {
+		stages { 
+			stage('Clone OpenMPI') { 
+				steps {			
+					echo '*** Clone ***************'
+					sh 'git fetch ${GIT_OMPIFORK}'
+					sh 'pwd'
+				} 
+			} // Clone OpenMPI
+
+			stage('Clone PMIx') { 
+				steps {			
+					echo '*** Clone PMIx ***************'
+					sh 'cd ompi_fork/3rd-party/ && git fetch ${GIT_PMIX} && pwd'
+				}
+			} // Clone PMIx
+
+			stage('Clone PRRTE') { 
+				steps {			
+					echo '*** Clone PRRTE **************'
+					sh 'cd ompi_fork/3rd-party/ && git fetch ${GIT_PRRTE} && pwd'
+				}
+			} // Clone PRRTE
+
+			stage('Build OpenMPI ') { 
+				steps {			
+					echo '*** Build OpenMPI ***************'
+					sh 'pwd'
+					// yum install gcc flex libevent-devel.x86_64 hwloc-devel -y
+					sh 'cd ompi_fork/ && ./autogen.pl && ./configure --prefix=$PWD/../openmpi_build && make && make install && pwd'
+				}	
+			} // Build OpenMPI
+		}
+	} // Build 
+/*	stage('Clone OpenMPI') { 
 		steps {			
 			echo '*** Clone ***************'
 			sh 'git fetch ${GIT_OMPIFORK}'
@@ -57,7 +100,7 @@ pipeline {
 			sh 'cd ompi_fork/ && ./autogen.pl && ./configure --prefix=$PWD/../openmpi_build && make && make install && pwd'
 		}	
 	} // Build
-
+*/
 
    } // stages
    post {
