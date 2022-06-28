@@ -11,10 +11,12 @@ pipeline {
 		node { label 'first_pancake' }
 	}
 */
-/*
+
 	parameters {
-    	booleanParam(defaultValue: true, description: 'Build OMPI', name: 'BUILD')
-    	booleanParam(defaultValue: true, description: 'Deploy OMPI', name: 'DEPLOY')
+	    	booleanParam(defaultValue: true, description: 'Prepare', name: 'PREPARE')
+	    	booleanParam(defaultValue: true, description: 'Build',	 name: 'BUILD')
+	}
+/*    	booleanParam(defaultValue: true, description: 'Deploy OMPI', name: 'DEPLOY')
     	booleanParam(defaultValue: false, description: 'Remove OMPI', name: 'REMOVE')
 	}
 */
@@ -33,9 +35,14 @@ pipeline {
         	}
 
    	} // check
-	
-	stage('Build') {
-		stages { 
+
+	stage('Prepare') {
+		stages {
+			when {
+				expression {
+					return params.PREPARE
+				}
+			} 
 			stage('Clone OpenMPI') { 
 				steps {			
 					echo '*** Clone ***************'
@@ -57,6 +64,16 @@ pipeline {
 					sh 'cd ompi_fork/3rd-party/ && git fetch ${GIT_PRRTE} && pwd'
 				}
 			} // Clone PRRTE
+		}
+	} // stage('Prepare')
+
+	stage('Build') {
+		stages {
+			when {
+				expression {
+					return params.BUILD
+				}
+			}
 
 			stage('Build OpenMPI ') { 
 				steps {			
