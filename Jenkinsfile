@@ -16,9 +16,8 @@ pipeline {
 	    	booleanParam(defaultValue: true, description: 'Prepare', name: 'PREPARE')
 	    	booleanParam(defaultValue: true, description: 'Build',	 name: 'BUILD')
 	}
-/*    	booleanParam(defaultValue: true, description: 'Deploy OMPI', name: 'DEPLOY')
+/*
     	booleanParam(defaultValue: false, description: 'Remove OMPI', name: 'REMOVE')
-	}
 */
 
 	environment {
@@ -37,12 +36,12 @@ pipeline {
    	} // check
 
 	stage('Prepare') {
+		when {
+			expression {
+				return params.PREPARE
+			}
+		} 
 		stages {
-			when {
-				expression {
-					return params.PREPARE
-				}
-			} 
 			stage('Clone OpenMPI') { 
 				steps {			
 					echo '*** Clone ***************'
@@ -68,12 +67,13 @@ pipeline {
 	} // stage('Prepare')
 
 	stage('Build') {
-		stages {
-			when {
-				expression {
-					return params.BUILD
-				}
+		when {
+			expression {
+				return params.BUILD
 			}
+		}
+
+		stages {
 
 			stage('Build OpenMPI ') { 
 				steps {			
