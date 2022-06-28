@@ -1,12 +1,10 @@
 // Declarative method 
-/* 
-*******************************************
- Target: gather all needs in one place 
-	and build OpenMPI
-*******************************************
-*/
 
-*/
+// *******************************************
+// Target: gather all needs in one place 
+//	and build OpenMPI
+//*******************************************
+
 pipeline {
 	agent any
 /*	agent { 
